@@ -1,0 +1,48 @@
+name: Test workflow
+
+on: [push, workflow_dispatch]
+
+jobs:
+  some-random-linux-cmd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo to the world
+        run: echo 'Hecho to the woooorld !'
+        shell: sh
+  some-random-python-cmd:
+    runs-on: windows-latest
+    steps:
+      - name: "And now, some python !"
+        run: |
+          import platform
+          print(platform.uname())
+        shell: python
+  show-env-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show all env vars
+        run: printenv
+  show-github-object:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Attempt to show the github object
+        run: echo "${{ toJson(github) }}"
+  test-step-sequence:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        kikoolol: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    steps:
+      - name: First
+        run: echo 1st
+      - name: Second
+        run: echo 2nd
+      - name: Third
+        if: failure()
+        run: echo 3rd
+  test-waiting-matrix:
+    runs-on: ubuntu-latest
+    needs: test-step-sequence
+    steps:
+      - name: BS step
+        run: echo "I'm a BS step !!!"
