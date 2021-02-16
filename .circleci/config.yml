@@ -24,11 +24,13 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - hold:
-          type: approval
-      - build:
-          requires:
-            - hold
-      - test:
-          requires:
-            - hold
+      - build
+      - test
+      # - hold:
+      #     type: approval
+      # - build:
+      #     requires:
+      #       - hold
+      # - test:
+      #     requires:
+      #       - hold
