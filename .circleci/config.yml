@@ -14,7 +14,10 @@ jobs:
     steps:
       - checkout
       - run: echo "this is the test job"
-      - run: echo $ENVAR
+      - when:
+          condition: true
+          steps:
+            - run: echo "echo it works !!!!"
 
 
 # Orchestrate our job run sequence
