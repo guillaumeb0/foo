@@ -13,6 +13,7 @@ jobs:
       - run: echo "this is the build job"
       - node/install:
          install-yarn: true
+         install-npm: false
          node-version: 8.10.0
       - run:
           name: Echo node version
