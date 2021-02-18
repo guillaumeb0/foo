@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.1.0
+
 # Define the jobs we want to run for this project
 jobs:
   build:
@@ -8,6 +11,12 @@ jobs:
     steps:
       - checkout
       - run: echo "this is the build job"
+      - node/install:
+         install-yarn: true
+         node-version: 8.10.0
+      - run:
+          name: Echo node version
+          command: node -v
   test:
     docker:
       - image: cimg/ruby:2.6.6
